@@ -80,7 +80,7 @@ export function AssignRiderModal({
               <label
                 className={cx(
                   "flex cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 text-sm",
-                  riderId === r.id ? "border-teal-500 bg-teal-50" : "border-slate-200 hover:bg-slate-50",
+                  riderId === r.id ? "border-sky-500 bg-sky-50" : "border-slate-200 hover:bg-slate-50",
                 )}
               >
                 <input
@@ -89,7 +89,7 @@ export function AssignRiderModal({
                   value={r.id}
                   checked={riderId === r.id}
                   onChange={() => setRiderId(r.id)}
-                  className="h-4 w-4 text-teal-600"
+                  className="h-4 w-4 text-sky-700"
                 />
                 <span className="flex-1">
                   <span className="block font-medium text-slate-900">{r.name}</span>

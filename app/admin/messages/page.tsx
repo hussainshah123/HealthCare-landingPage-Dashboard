@@ -107,13 +107,13 @@ export default function AdminMessagesPage() {
                       {m.handled ? <Badge tone="green">Handled</Badge> : <Badge tone="yellow">New</Badge>}
                     </div>
                     <p className="mt-1 text-sm text-slate-500">
-                      <a href={`mailto:${m.email}`} className="text-teal-700 hover:underline">
+                      <a href={`mailto:${m.email}`} className="text-sky-700 hover:underline">
                         {m.email}
                       </a>
                       {m.phone ? (
                         <>
                           {" · "}
-                          <a href={`tel:${m.phone.replace(/\s+/g, "")}`} className="text-teal-700 hover:underline">
+                          <a href={`tel:${m.phone.replace(/\s+/g, "")}`} className="text-sky-700 hover:underline">
                             {m.phone}
                           </a>
                         </>

@@ -40,7 +40,7 @@ export default function PharmacyOverviewPage() {
               value={count("PRESCRIPTION_UNDER_REVIEW")}
               tone={count("PRESCRIPTION_UNDER_REVIEW") ? "amber" : "slate"}
               hint={
-                <Link href="/pharmacy/prescriptions" className="text-teal-700 hover:underline">
+                <Link href="/pharmacy/prescriptions" className="text-sky-700 hover:underline">
                   Open queue →
                 </Link>
               }
@@ -51,7 +51,7 @@ export default function PharmacyOverviewPage() {
           <Card
             title="Open orders"
             actions={
-              <Link href="/pharmacy/orders" className="text-sm font-medium text-teal-700 hover:underline">
+              <Link href="/pharmacy/orders" className="text-sm font-medium text-sky-700 hover:underline">
                 Manage orders →
               </Link>
             }

@@ -25,7 +25,7 @@ export default function ActiveDeliveriesPage() {
       key: "order",
       header: "Order",
       cell: (d) => (
-        <Link href={`/admin/orders/${d.orderId}`} className="font-medium text-teal-700 hover:underline">
+        <Link href={`/admin/orders/${d.orderId}`} className="font-medium text-sky-700 hover:underline">
           #{d.orderNumber}
         </Link>
       ),

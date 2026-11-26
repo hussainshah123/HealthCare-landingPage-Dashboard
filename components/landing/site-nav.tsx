@@ -17,10 +17,15 @@ const LINKS = [
 /** Transparent over the hero, frosted glass once the page scrolls; collapsible on phones. */
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -85,6 +90,13 @@ export function SiteNav() {
           <Icon name={open ? "close" : "menu"} size={22} />
         </button>
       </nav>
+
+      {/* reading progress */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-gradient-to-r from-[#0369a1] via-[#0ea5e9] to-[#67e8f9] transition-opacity"
+        style={{ transform: `scaleX(${progress})`, opacity: scrolled ? 1 : 0 }}
+        aria-hidden="true"
+      />
 
       {open ? (
         <div id="mobile-menu" className="border-t border-sky-100 bg-white px-4 pb-5 pt-2 md:hidden">

@@ -117,12 +117,16 @@ function wavePath(amp: number, h: number) {
   return `${d} V${h} H0 Z`;
 }
 
-/** Layered waves sliding along the bottom edge, filled with the next section's colour. */
-export function Waves({ fill = "#f5fbff" }: { fill?: string }) {
+/**
+ * Layered waves sliding along the bottom edge, filled with the next section's
+ * colour. `backFill` tints the two translucent back layers (use a blue over
+ * dark sections so they don't turn grey).
+ */
+export function Waves({ fill = "#f5fbff", backFill }: { fill?: string; backFill?: string }) {
   return (
     <div className={styles.waves} aria-hidden="true">
       <svg className={styles.wave} style={{ animationDuration: "18s" }} viewBox="0 0 2400 120" preserveAspectRatio="none">
-        <path d={wavePath(36, 120)} fill={fill} opacity="0.35" transform="translate(0 20)" />
+        <path d={wavePath(36, 120)} fill={backFill ?? fill} opacity="0.35" transform="translate(0 20)" />
       </svg>
       <svg
         className={styles.wave}
@@ -130,7 +134,7 @@ export function Waves({ fill = "#f5fbff" }: { fill?: string }) {
         viewBox="0 0 2400 120"
         preserveAspectRatio="none"
       >
-        <path d={wavePath(28, 120)} fill={fill} opacity="0.55" transform="translate(0 40)" />
+        <path d={wavePath(28, 120)} fill={backFill ?? fill} opacity="0.55" transform="translate(0 40)" />
       </svg>
       <svg className={styles.wave} style={{ animationDuration: "12s" }} viewBox="0 0 2400 120" preserveAspectRatio="none">
         <path d={wavePath(20, 120)} fill={fill} transform="translate(0 62)" />

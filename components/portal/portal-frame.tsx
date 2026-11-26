@@ -17,7 +17,7 @@ export function PortalFrame({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-1 flex-col bg-slate-50 text-slate-900 lg:flex-row">
+    <div className="flex min-h-screen flex-1 flex-col bg-[#f3f9fd] bg-[radial-gradient(900px_420px_at_100%_-10%,rgba(14,165,233,0.10),transparent_60%)] text-slate-900 lg:flex-row">
       <Suspense fallback={<SidebarFallback groups={nav} title={title} />}>
         <Sidebar groups={nav} title={title} />
       </Suspense>

@@ -7,6 +7,7 @@ import { FaqSection } from "@/components/landing/faq-section";
 import { FeatureBento } from "@/components/landing/feature-bento";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { Icon } from "@/components/landing/icons";
+import { SpotlightGroup, Tilt } from "@/components/landing/interactive";
 import { Marquee } from "@/components/landing/marquee";
 import { PhoneMockup } from "@/components/landing/phone-mockup";
 import { Reveal } from "@/components/landing/reveal";
@@ -94,7 +95,9 @@ export default function Home() {
 
             <div className="relative">
               <div className="absolute inset-0 -z-10 m-auto h-80 w-80 rounded-full bg-sky-300/30 blur-3xl" />
-              <PhoneMockup />
+              <Tilt>
+                <PhoneMockup />
+              </Tilt>
             </div>
           </div>
 
@@ -118,7 +121,9 @@ export default function Home() {
                 riders together so you can get care from home.
               </p>
             </Reveal>
-            <FeatureBento />
+            <SpotlightGroup>
+              <FeatureBento />
+            </SpotlightGroup>
           </div>
         </section>
 

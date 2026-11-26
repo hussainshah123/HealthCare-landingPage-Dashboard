@@ -378,6 +378,22 @@
   transform: translateX(120%);
 }
 
+/* Soft glow that follows the pointer (position set by SpotlightGroup). */
+.lp-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(125, 211, 252, 0.22), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.lp-tile:hover::before {
+  opacity: 1;
+}
+
 /* Best-price row highlight sweep */
 .lp-shimmer {
   position: relative;
@@ -792,6 +808,7 @@
     display: none;
   }
   .lp-tile,
+  .lp-tile::before,
   .lp-tile::after,
   .lp-tabIndicator {
     transition: none;

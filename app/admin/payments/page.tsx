@@ -21,7 +21,7 @@ const columns: Column<Payment>[] = [
     header: "For",
     cell: (p) =>
       p.orderId ? (
-        <Link href={`/admin/orders/${p.orderId}`} className="text-teal-700 hover:underline">
+        <Link href={`/admin/orders/${p.orderId}`} className="text-sky-700 hover:underline">
           Order
         </Link>
       ) : p.appointmentId ? (

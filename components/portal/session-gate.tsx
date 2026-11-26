@@ -28,7 +28,7 @@ export async function SessionGate({ role, children }: { role: Role; children: Re
 
   return (
     <>
-      <header className="flex items-center justify-end border-b border-slate-200 bg-white px-6 py-3 lg:px-8">
+      <header className="sticky top-0 z-20 flex items-center justify-end border-b border-sky-100/80 bg-white/75 px-6 py-3 backdrop-blur-xl lg:px-8">
         <UserMenu name={user.name} email={user.email} role={user.role} status={user.status} />
       </header>
       {role === "PHARMACY" && user.status !== "ACTIVE" && (

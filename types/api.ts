@@ -322,3 +322,31 @@ export interface ContactMessage {
   handled: boolean;
   createdAt: string;
 }
+
+/** GET /admin/analytics?days= */
+export interface AnalyticsTotals {
+  orders: number;
+  orderValue: number;
+  newUsers: number;
+  appointments: number;
+  deliveries: number;
+}
+
+export interface AnalyticsPoint extends AnalyticsTotals {
+  /** Local calendar day, YYYY-MM-DD. */
+  date: string;
+}
+
+export interface AdminAnalytics {
+  days: number;
+  from: string;
+  to: string;
+  series: AnalyticsPoint[];
+  totals: AnalyticsTotals;
+  previous: AnalyticsTotals;
+  ordersByStatus: { status: string; count: number }[];
+  usersByRole: { role: string; count: number }[];
+  topPharmacies: { id: string; name: string; orders: number; orderValue: number }[];
+  topMedicines: { name: string; quantity: number }[];
+  live: { activeDeliveries: number; ridersOnline: number; pendingApprovals: number; newMessages: number };
+}

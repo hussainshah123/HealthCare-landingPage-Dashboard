@@ -57,7 +57,7 @@ export function PrescriptionReviewModal({
             href={fileUrl}
             target="_blank"
             rel="noreferrer"
-            className="mr-auto inline-flex h-10 items-center text-sm font-medium text-teal-700 hover:underline"
+            className="mr-auto inline-flex h-10 items-center text-sm font-medium text-sky-700 hover:underline"
           >
             Open in new tab
           </a>

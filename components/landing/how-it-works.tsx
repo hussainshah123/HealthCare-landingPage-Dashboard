@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { Waves } from "./decor";
 import { Icon, type IconName } from "./icons";
 import { Reveal } from "./reveal";
 import styles from "./styles";
@@ -13,7 +14,11 @@ const STEPS: { icon: IconName; title: string; text: string }[] = [
 /** Dark section: four glowing steps with a light travelling along the line between them. */
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className={`${styles.dark} scroll-mt-20 px-4 py-24 sm:px-6 sm:py-32`} aria-labelledby="how-title">
+    <section id="how-it-works" className={`${styles.dark} scroll-mt-20 px-4 pb-40 pt-36 sm:px-6 sm:pb-48 sm:pt-44`} aria-labelledby="how-title">
+      {/* light section flowing in from above */}
+      <div className="absolute inset-x-0 top-0 h-[120px] rotate-180" aria-hidden="true">
+        <Waves fill="#f5fbff" backFill="#38bdf8" />
+      </div>
       <div className="mx-auto max-w-6xl">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-sky-300">How it works</p>
@@ -49,6 +54,7 @@ export function HowItWorks() {
           </ol>
         </Reveal>
       </div>
+      <Waves fill="#f5fbff" backFill="#38bdf8" />
     </section>
   );
 }

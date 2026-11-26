@@ -3,7 +3,7 @@ import { Button } from "./button";
 export function Spinner({ label = "Loading…" }: { label?: string }) {
   return (
     <div className="flex items-center justify-center gap-3 py-12 text-sm text-slate-500" role="status">
-      <span className="h-5 w-5 animate-spin rounded-full border-2 border-teal-600 border-t-transparent" aria-hidden />
+      <span className="h-5 w-5 animate-spin rounded-full border-2 border-sky-700 border-t-transparent" aria-hidden />
       {label}
     </div>
   );

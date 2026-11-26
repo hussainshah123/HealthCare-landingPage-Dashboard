@@ -19,7 +19,7 @@ const columns: Column<Order>[] = [
     key: "number",
     header: "Order",
     cell: (o) => (
-      <Link href={`/admin/orders/${o.id}`} className="font-medium text-teal-700 hover:underline">
+      <Link href={`/admin/orders/${o.id}`} className="font-medium text-sky-700 hover:underline">
         #{o.orderNumber}
       </Link>
     ),

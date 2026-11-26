@@ -19,7 +19,7 @@ export default function CategoriesPage() {
           header: "Image",
           cell: (c) =>
             c.imageUrl ? (
-              <a href={c.imageUrl} target="_blank" rel="noreferrer" className="text-xs text-teal-700 hover:underline">
+              <a href={c.imageUrl} target="_blank" rel="noreferrer" className="text-xs text-sky-700 hover:underline">
                 View
               </a>
             ) : (

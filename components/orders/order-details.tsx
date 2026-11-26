@@ -57,7 +57,7 @@ export function OrderHistory({ order }: { order: Order }) {
         <li key={`${h.status}-${h.createdAt}-${idx}`} className="mb-4 ml-5 last:mb-0">
           <span
             className={`absolute -left-[5px] mt-1.5 h-2.5 w-2.5 rounded-full ${
-              idx === history.length - 1 ? "bg-teal-600" : "bg-slate-300"
+              idx === history.length - 1 ? "bg-sky-700" : "bg-slate-300"
             }`}
             aria-hidden
           />

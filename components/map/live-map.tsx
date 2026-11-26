@@ -15,7 +15,7 @@ export const LiveMap = dynamic(() => import("./leaflet-map"), {
 
 export function MapLegend() {
   const items = [
-    { color: "bg-teal-600", label: "Rider" },
+    { color: "bg-sky-700", label: "Rider" },
     { color: "bg-orange-600", label: "Pharmacy" },
     { color: "bg-indigo-600", label: "Drop-off" },
   ];

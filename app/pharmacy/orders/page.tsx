@@ -121,7 +121,7 @@ export default function PharmacyOrdersPage() {
               className={cx(
                 "-mb-px border-b-2 px-3 pb-2.5 text-sm font-medium whitespace-nowrap",
                 status === t.value
-                  ? "border-teal-600 text-teal-700"
+                  ? "border-sky-700 text-sky-700"
                   : "border-transparent text-slate-500 hover:text-slate-700",
               )}
             >

@@ -2,42 +2,42 @@ import type { Metadata } from "next";
 import { PortalFrame } from "@/components/portal/portal-frame";
 import type { NavGroup } from "@/components/ui/sidebar";
 
-export const metadata: Metadata = { title: "Admin · HealthHub" };
+export const metadata: Metadata = { title: "Admin · MediGo" };
 
 const NAV: NavGroup[] = [
-  { items: [{ href: "/admin", label: "Overview", exact: true }] },
+  { items: [{ href: "/admin", icon: "grid", label: "Overview", exact: true }] },
   {
     label: "People",
     items: [
-      { href: "/admin/users", label: "All users" },
-      { href: "/admin/doctors", label: "Doctors" },
-      { href: "/admin/riders", label: "Riders" },
-      { href: "/admin/pharmacies", label: "Pharmacies" },
-      { href: "/admin/customers", label: "Customers" },
+      { href: "/admin/users", icon: "users", label: "All users" },
+      { href: "/admin/doctors", icon: "stethoscope", label: "Doctors" },
+      { href: "/admin/riders", icon: "bike", label: "Riders" },
+      { href: "/admin/pharmacies", icon: "store", label: "Pharmacies" },
+      { href: "/admin/customers", icon: "user", label: "Customers" },
     ],
   },
   {
     label: "Operations",
     items: [
-      { href: "/admin/orders", label: "Orders" },
-      { href: "/admin/deliveries", label: "Active deliveries" },
-      { href: "/admin/appointments", label: "Appointments" },
-      { href: "/admin/payments", label: "Payments" },
+      { href: "/admin/orders", icon: "package", label: "Orders" },
+      { href: "/admin/deliveries", icon: "truck", label: "Active deliveries" },
+      { href: "/admin/appointments", icon: "calendar", label: "Appointments" },
+      { href: "/admin/payments", icon: "wallet", label: "Payments" },
     ],
   },
   {
     label: "Catalogue",
     items: [
-      { href: "/admin/medicines", label: "Medicines" },
-      { href: "/admin/categories", label: "Categories" },
-      { href: "/admin/specializations", label: "Specializations" },
+      { href: "/admin/medicines", icon: "pill", label: "Medicines" },
+      { href: "/admin/categories", icon: "tag", label: "Categories" },
+      { href: "/admin/specializations", icon: "layers", label: "Specializations" },
     ],
   },
   {
     label: "Platform",
     items: [
-      { href: "/admin/messages", label: "Messages" },
-      { href: "/admin/settings", label: "Settings" },
+      { href: "/admin/messages", icon: "inbox", label: "Messages" },
+      { href: "/admin/settings", icon: "settings", label: "Settings" },
     ],
   },
 ];

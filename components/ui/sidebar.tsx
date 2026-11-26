@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { BrandMark, Icon, type IconName } from "@/components/landing/icons";
 import { cx } from "./cx";
 
 export interface NavItem {
@@ -10,6 +11,8 @@ export interface NavItem {
   label: string;
   /** Match only the exact path (used for portal home links). */
   exact?: boolean;
+  /** Line icon shown before the label. */
+  icon?: IconName;
 }
 
 export interface NavGroup {
@@ -24,13 +27,13 @@ function isActive(pathname: string, item: NavItem) {
 
 export function SidebarNav({ groups, pathname }: { groups: NavGroup[]; pathname: string | null }) {
   return (
-    <nav className="flex flex-col gap-5 px-3 py-4">
+    <nav className="flex flex-col gap-6 px-3 py-5" aria-label="Portal">
       {groups.map((g, i) => (
         <div key={g.label ?? i}>
           {g.label && (
-            <p className="mb-1.5 px-3 text-[11px] font-semibold tracking-wider text-slate-400 uppercase">{g.label}</p>
+            <p className="mb-2 px-3 text-[11px] font-semibold tracking-[0.14em] text-sky-300/60 uppercase">{g.label}</p>
           )}
-          <ul className="flex flex-col gap-0.5">
+          <ul className="flex flex-col gap-1">
             {g.items.map((item) => {
               const active = pathname ? isActive(pathname, item) : false;
               return (
@@ -39,14 +42,29 @@ export function SidebarNav({ groups, pathname }: { groups: NavGroup[]; pathname:
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cx(
-                      "flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                      active ? "bg-teal-50 text-teal-800" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+                      "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                      active
+                        ? "bg-gradient-to-r from-white/15 to-white/[0.04] text-white shadow-[inset_0_0_0_1px_rgba(125,211,252,0.18)]"
+                        : "text-sky-100/70 hover:bg-white/[0.06] hover:text-white",
                     )}
                   >
+                    {active && (
+                      <span
+                        className="absolute inset-y-2 -left-3 w-1 rounded-r-full bg-sky-300 shadow-[0_0_12px_2px_rgba(125,211,252,0.7)]"
+                        aria-hidden
+                      />
+                    )}
                     <span
-                      className={cx("mr-3 h-1.5 w-1.5 rounded-full", active ? "bg-teal-600" : "bg-slate-300")}
+                      className={cx(
+                        "grid h-8 w-8 shrink-0 place-items-center rounded-lg transition-colors",
+                        active
+                          ? "bg-gradient-to-br from-sky-400 to-sky-700 text-white shadow-lg shadow-sky-900/40"
+                          : "bg-white/[0.06] text-sky-200/80 group-hover:text-white",
+                      )}
                       aria-hidden
-                    />
+                    >
+                      {item.icon ? <Icon name={item.icon} size={16} /> : <span className="h-1.5 w-1.5 rounded-full bg-current" />}
+                    </span>
                     {item.label}
                   </Link>
                 </li>
@@ -59,6 +77,9 @@ export function SidebarNav({ groups, pathname }: { groups: NavGroup[]; pathname:
   );
 }
 
+const PANEL =
+  "bg-[radial-gradient(420px_260px_at_0%_0%,rgba(14,165,233,0.28),transparent_60%),linear-gradient(180deg,#03253f_0%,#021a2c_100%)]";
+
 /** Sidebar that highlights the active route. Must be rendered inside <Suspense> (reads the pathname). */
 export function Sidebar({ groups, title }: { groups: NavGroup[]; title: string }) {
   const pathname = usePathname();
@@ -66,31 +87,41 @@ export function Sidebar({ groups, title }: { groups: NavGroup[]; title: string }
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 lg:hidden">
+      <div className={cx("flex items-center justify-between px-4 py-3 lg:hidden", PANEL)}>
         <Brand title={title} />
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
-          className="rounded-md p-2 text-slate-600 hover:bg-slate-100"
+          className="grid h-10 w-10 place-items-center rounded-xl text-sky-100 hover:bg-white/10"
           aria-expanded={open}
           aria-label="Toggle navigation"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
-          </svg>
+          <Icon name={open ? "close" : "menu"} size={20} />
         </button>
       </div>
       {open && (
-        <div className="border-b border-slate-200 bg-white lg:hidden" onClick={() => setOpen(false)}>
+        <div className={cx("lg:hidden", PANEL)} onClick={() => setOpen(false)}>
           <SidebarNav groups={groups} pathname={pathname} />
         </div>
       )}
-      <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-white lg:block">
+      <aside className={cx("hidden w-72 shrink-0 lg:block", PANEL)}>
         <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">
-          <div className="border-b border-slate-100 px-6 py-5">
+          <div className="px-6 pt-6 pb-2">
             <Brand title={title} />
           </div>
           <SidebarNav groups={groups} pathname={pathname} />
+          <div className="mt-auto p-4">
+            <div className="rounded-2xl bg-white/[0.06] p-4 ring-1 ring-white/10">
+              <p className="flex items-center gap-2 text-xs font-semibold text-sky-100">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60 motion-reduce:animate-none" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Systems live
+              </p>
+              <p className="mt-1 text-xs text-sky-200/60">Data refreshes automatically.</p>
+            </div>
+          </div>
         </div>
       </aside>
     </>
@@ -99,8 +130,8 @@ export function Sidebar({ groups, title }: { groups: NavGroup[]; title: string }
 
 export function SidebarFallback({ groups, title }: { groups: NavGroup[]; title: string }) {
   return (
-    <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-white lg:block">
-      <div className="border-b border-slate-100 px-6 py-5">
+    <aside className={cx("hidden w-72 shrink-0 lg:block", PANEL)}>
+      <div className="px-6 pt-6 pb-2">
         <Brand title={title} />
       </div>
       <SidebarNav groups={groups} pathname={null} />
@@ -110,15 +141,11 @@ export function SidebarFallback({ groups, title }: { groups: NavGroup[]; title: 
 
 function Brand({ title }: { title: string }) {
   return (
-    <Link href="/" className="flex items-center gap-2.5">
-      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600 text-white" aria-hidden>
-        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-          <path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" />
-        </svg>
-      </span>
+    <Link href="/" className="flex items-center gap-3">
+      <BrandMark size={38} />
       <span className="leading-tight">
-        <span className="block text-sm font-semibold text-slate-900">HealthHub</span>
-        <span className="block text-xs text-slate-500">{title}</span>
+        <span className="block text-base font-extrabold tracking-tight text-white">MediGo</span>
+        <span className="block text-xs text-sky-200/70">{title}</span>
       </span>
     </Link>
   );

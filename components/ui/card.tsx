@@ -16,9 +16,9 @@ export function Card({
   bodyClassName?: string;
 }) {
   return (
-    <section className={cx("rounded-xl border border-slate-200 bg-white shadow-sm", className)}>
+    <section className={cx("rounded-2xl border border-sky-100/80 bg-white shadow-[0_12px_32px_-20px_rgba(3,105,161,0.35)]", className)}>
       {(title || actions) && (
-        <header className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 px-5 py-4">
+        <header className="flex flex-wrap items-start justify-between gap-3 border-b border-sky-50 px-5 py-4">
           <div>
             {title && <h2 className="text-sm font-semibold text-slate-900">{title}</h2>}
             {description && <p className="mt-0.5 text-xs text-slate-500">{description}</p>}
@@ -44,12 +44,12 @@ export function StatCard({
 }) {
   const accent = {
     slate: "bg-slate-400",
-    teal: "bg-teal-500",
+    teal: "bg-gradient-to-b from-sky-400 to-sky-700",
     amber: "bg-amber-500",
     rose: "bg-rose-500",
   }[tone];
   return (
-    <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="relative overflow-hidden rounded-2xl border border-sky-100/80 bg-white p-5 shadow-[0_12px_32px_-20px_rgba(3,105,161,0.35)]">
       <span className={cx("absolute inset-y-0 left-0 w-1", accent)} aria-hidden />
       <p className="text-xs font-medium tracking-wide text-slate-500 uppercase">{label}</p>
       <p className="mt-2 text-2xl font-semibold text-slate-900 tabular-nums">{value}</p>
@@ -70,7 +70,7 @@ export function PageHeader({
   return (
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="text-xl font-semibold text-slate-900">{title}</h1>
+        <h1 className="text-2xl font-extrabold tracking-tight text-[#0b2135]">{title}</h1>
         {description && <p className="mt-1 text-sm text-slate-500">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}

@@ -2,7 +2,7 @@ import type { InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes 
 import { cx } from "./cx";
 
 const control =
-  "block w-full rounded-lg border-0 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 disabled:bg-slate-50 disabled:text-slate-500";
+  "block w-full rounded-lg border-0 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-sky-700 disabled:bg-slate-50 disabled:text-slate-500";
 
 export function Field({
   label,
@@ -46,7 +46,7 @@ export function Textarea({ className, ...props }: TextareaHTMLAttributes<HTMLTex
 export function Checkbox({ label, ...props }: InputHTMLAttributes<HTMLInputElement> & { label: string }) {
   return (
     <label className="inline-flex items-center gap-2 text-sm text-slate-700">
-      <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-600" {...props} />
+      <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-sky-700 focus:ring-sky-700" {...props} />
       {label}
     </label>
   );

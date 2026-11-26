@@ -224,7 +224,7 @@ function InventoryModal({
                       onClick={() => setMedicine({ id: m.id, name: m.name })}
                       className={cx(
                         "flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-slate-50",
-                        medicine?.id === m.id && "bg-teal-50",
+                        medicine?.id === m.id && "bg-sky-50",
                       )}
                     >
                       <span>
