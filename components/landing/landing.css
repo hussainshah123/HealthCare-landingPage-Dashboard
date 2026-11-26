@@ -1,0 +1,343 @@
+/* Styles for the marketing landing page (global CSS: this project's Turbopack
+   rule sends every .css file through Tailwind, which does not support CSS
+   modules, so classes carry an `lp-` prefix instead of being hashed).
+   Animations for the landing page. Every moving part stops for
+   visitors who ask for reduced motion (see the media query at the end). */
+
+.lp-page {
+  --ink: #0b2135;
+  --muted: #4a6275;
+  --primary: #0369a1;
+  --primary-dark: #024873;
+  --aqua: #0ea5e9;
+  --sky: #e3f2fa;
+  background: #f5fbff;
+  color: var(--ink);
+}
+
+/* ---------- Hero ---------- */
+
+.lp-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(14, 165, 233, 0.55), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(56, 189, 248, 0.35), transparent 60%),
+    linear-gradient(160deg, #023a5e 0%, #0369a1 55%, #0ea5e9 100%);
+  color: #fff;
+}
+
+.lp-gradientText {
+  background: linear-gradient(90deg, #7dd3fc, #e0f2fe 45%, #a5f3fc);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Rising bubbles */
+.lp-bubble {
+  position: absolute;
+  bottom: -80px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  background: radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.75) 0 12%, rgba(255, 255, 255, 0.12) 13% 100%);
+  animation: rise linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes rise {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(18px, -55vh);
+  }
+  100% {
+    transform: translate(-12px, -115vh);
+    opacity: 0;
+  }
+}
+
+/* Floating capsules / pills */
+.lp-float {
+  animation: float 7s ease-in-out infinite;
+}
+
+.lp-floatSlow {
+  animation: float 10s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--r, 0deg));
+  }
+  50% {
+    transform: translateY(-18px) rotate(calc(var(--r, 0deg) + 12deg));
+  }
+}
+
+/* Waves along the bottom of a section */
+.lp-waves {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 120px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.lp-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  animation: waveSlide linear infinite;
+}
+
+@keyframes waveSlide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Phone mockup ---------- */
+
+.lp-phone {
+  animation: phoneIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) both, bob 7s ease-in-out 1s infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes phoneIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Heartbeat line that draws itself */
+.lp-ecg {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: ecg 2.6s ease-in-out infinite;
+}
+
+@keyframes ecg {
+  0% {
+    stroke-dashoffset: 220;
+  }
+  55% {
+    stroke-dashoffset: 0;
+  }
+  80% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -220;
+    opacity: 0.2;
+  }
+}
+
+/* Bubble tab bar inside the mockup: the bubble hops between tabs */
+.lp-tabBubble {
+  animation: tabHop 8s cubic-bezier(0.5, 0, 0.2, 1) infinite;
+}
+
+@keyframes tabHop {
+  0%,
+  20% {
+    transform: translateX(0);
+  }
+  25%,
+  45% {
+    transform: translateX(var(--step));
+  }
+  50%,
+  70% {
+    transform: translateX(calc(var(--step) * 2));
+  }
+  75%,
+  95% {
+    transform: translateX(var(--step));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ---------- Live tracking map ---------- */
+
+.lp-route {
+  stroke-dasharray: 6 8;
+  animation: dash 1.2s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.lp-riderStatic {
+  display: none;
+}
+
+.lp-ping {
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* ---------- Cards & scroll reveal ---------- */
+
+.lp-card {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.lp-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -20px rgba(3, 105, 161, 0.35);
+  border-color: rgba(14, 165, 233, 0.45);
+}
+
+.lp-iconChip {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.lp-card:hover .lp-iconChip {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.lp-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: var(--delay, 0ms);
+}
+
+.lp-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Step connector line that fills in when revealed */
+.lp-connector {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s;
+}
+
+.lp-revealed .lp-connector {
+  transform: scaleX(1);
+}
+
+.lp-pulseDot {
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(14, 165, 233, 0);
+  }
+}
+
+/* FAQ chevron */
+.lp-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.lp-faq[open] .lp-chevron {
+  transform: rotate(180deg);
+}
+
+.lp-chevron {
+  transition: transform 0.3s ease;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-gradientText,
+  .lp-bubble,
+  .lp-float,
+  .lp-floatSlow,
+  .lp-wave,
+  .lp-phone,
+  .lp-ecg,
+  .lp-tabBubble,
+  .lp-route,
+  .lp-ping,
+  .lp-pulseDot {
+    animation: none !important;
+  }
+  .lp-ecg {
+    stroke-dashoffset: 0;
+  }
+  .lp-riderMoving {
+    display: none;
+  }
+  .lp-riderStatic {
+    display: inline;
+  }
+  .lp-bubble {
+    display: none;
+  }
+  .lp-reveal,
+  .lp-connector,
+  .lp-card,
+  .lp-iconChip {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
