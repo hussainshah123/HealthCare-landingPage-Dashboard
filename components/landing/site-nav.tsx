@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BrandMark, Icon } from "./icons";
 
+// Absolute ("/#…") so the section links also work from /about and /contact.
 const LINKS = [
-  { href: "#features", label: "Features" },
-  { href: "#how-it-works", label: "How it works" },
-  { href: "#tracking", label: "Live tracking" },
-  { href: "#partners", label: "Partners" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#features", label: "Features" },
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/#tracking", label: "Live tracking" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 /** Transparent over the hero, frosted glass once the page scrolls; collapsible on phones. */
@@ -43,14 +45,14 @@ export function SiteNav() {
         <ul className="hidden items-center gap-1 md:flex">
           {LINKS.map((l) => (
             <li key={l.href}>
-              <a
+              <Link
                 href={l.href}
                 className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                   solid ? "text-[#4a6275] hover:bg-sky-50 hover:text-[#0369a1]" : "text-white/85 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {l.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -64,12 +66,12 @@ export function SiteNav() {
           >
             Partner login
           </Link>
-          <a
-            href="#get-app"
+          <Link
+            href="/#get-app"
             className="rounded-full bg-gradient-to-r from-[#0369a1] to-[#0ea5e9] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-600/30 transition-transform hover:-translate-y-0.5"
           >
             Get the app
-          </a>
+          </Link>
         </div>
 
         <button
@@ -89,13 +91,13 @@ export function SiteNav() {
           <ul className="flex flex-col">
             {LINKS.map((l) => (
               <li key={l.href}>
-                <a
+                <Link
                   href={l.href}
                   onClick={() => setOpen(false)}
                   className="block rounded-xl px-3 py-3 text-base font-medium text-[#0b2135] hover:bg-sky-50"
                 >
                   {l.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -106,13 +108,13 @@ export function SiteNav() {
             >
               Partner login
             </Link>
-            <a
-              href="#get-app"
+            <Link
+              href="/#get-app"
               onClick={() => setOpen(false)}
               className="rounded-full bg-gradient-to-r from-[#0369a1] to-[#0ea5e9] py-3 text-center text-sm font-semibold text-white"
             >
               Get the app
-            </a>
+            </Link>
           </div>
         </div>
       ) : null}

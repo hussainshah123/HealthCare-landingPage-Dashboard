@@ -304,6 +304,447 @@
   transition: transform 0.3s ease;
 }
 
+
+/* ================= Sections below the hero ================= */
+
+/* Scrolling category strip */
+.lp-marquee {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.lp-marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.lp-marquee:hover .lp-marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Soft drifting colour blobs behind light sections */
+.lp-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.55;
+  animation: blobDrift 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes blobDrift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(40px, -30px) scale(1.12);
+  }
+}
+
+/* Bento tiles */
+.lp-tile {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease;
+}
+
+.lp-tile:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -28px rgba(3, 105, 161, 0.55);
+}
+
+.lp-tile::after {
+  /* light sweep across the tile on hover */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.9s ease;
+  pointer-events: none;
+}
+
+.lp-tile:hover::after {
+  transform: translateX(120%);
+}
+
+/* Best-price row highlight sweep */
+.lp-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.lp-shimmer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  transform: translateX(-100%);
+  animation: sweep 2.8s ease-in-out infinite;
+}
+
+@keyframes sweep {
+  60%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Prescription scan line */
+.lp-scan {
+  animation: scan 2.6s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(96px);
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+}
+
+.lp-approve {
+  animation: approve 2.6s ease-in-out infinite;
+}
+
+@keyframes approve {
+  0%,
+  45% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  55%,
+  90% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Chat bubbles appearing one after another */
+.lp-bubbleIn {
+  opacity: 0;
+  animation: bubbleIn 6s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes bubbleIn {
+  0%,
+  5% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  12%,
+  85% {
+    opacity: 1;
+    transform: none;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.lp-typing span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 1.5px;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: typing 1.2s ease-in-out infinite;
+}
+
+.lp-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.lp-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* 4-digit code popping in */
+.lp-otp {
+  animation: otp 4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes otp {
+  0%,
+  8% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  16%,
+  85% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Payment method toggle */
+.lp-knob {
+  animation: knob 4s ease-in-out infinite;
+}
+
+@keyframes knob {
+  0%,
+  40% {
+    transform: translateX(0);
+  }
+  50%,
+  90% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Dark "how it works" section */
+.lp-dark {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(700px 380px at 15% 0%, rgba(14, 165, 233, 0.28), transparent 60%),
+    radial-gradient(600px 400px at 90% 100%, rgba(56, 189, 248, 0.2), transparent 60%),
+    linear-gradient(180deg, #021a2c 0%, #03253f 100%);
+  color: #fff;
+}
+
+.lp-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+.lp-travel {
+  animation: travel 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes travel {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.lp-stepGlow {
+  animation: stepGlow 4.5s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes stepGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(125, 211, 252, 0.25),
+      0 0 0 0 rgba(14, 165, 233, 0);
+  }
+  15% {
+    box-shadow:
+      0 0 0 1px rgba(125, 211, 252, 0.8),
+      0 0 34px 6px rgba(14, 165, 233, 0.55);
+  }
+  35% {
+    box-shadow:
+      0 0 0 1px rgba(125, 211, 252, 0.25),
+      0 0 0 0 rgba(14, 165, 233, 0);
+  }
+}
+
+/* Order timeline that fills step by step */
+.lp-tlFill {
+  animation: tlFill 6s ease-in-out infinite;
+}
+
+@keyframes tlFill {
+  0% {
+    height: 0%;
+  }
+  80%,
+  96% {
+    height: 100%;
+  }
+  100% {
+    height: 0%;
+  }
+}
+
+.lp-tlDot0 {
+  animation: tlDot0 6s ease-in-out infinite;
+}
+
+@keyframes tlDot0 {
+  0%,
+  0% {
+    background: #fff;
+    border-color: #bae6fd;
+    color: #bae6fd;
+  }
+  3%,
+  96% {
+    background: #0369a1;
+    border-color: #0369a1;
+    color: #fff;
+  }
+  100% {
+    background: #fff;
+    border-color: #bae6fd;
+    color: #bae6fd;
+  }
+}
+
+.lp-tlDot1 {
+  animation: tlDot1 6s ease-in-out infinite;
+}
+
+@keyframes tlDot1 {
+  0%,
+  25% {
+    background: #fff;
+    border-color: #bae6fd;
+    color: #bae6fd;
+  }
+  28%,
+  96% {
+    background: #0369a1;
+    border-color: #0369a1;
+    color: #fff;
+  }
+  100% {
+    background: #fff;
+    border-color: #bae6fd;
+    color: #bae6fd;
+  }
+}
+
+.lp-tlDot2 {
+  animation: tlDot2 6s ease-in-out infinite;
+}
+
+@keyframes tlDot2 {
+  0%,
+  52% {
+    background: #fff;
+    border-color: #bae6fd;
+    color: #bae6fd;
+  }
+  55%,
+  96% {
+    background: #0369a1;
+    border-color: #0369a1;
+    color: #fff;
+  }
+  100% {
+    background: #fff;
+    border-color: #bae6fd;
+    color: #bae6fd;
+  }
+}
+
+.lp-tlDot3 {
+  animation: tlDot3 6s ease-in-out infinite;
+}
+
+@keyframes tlDot3 {
+  0%,
+  79% {
+    background: #fff;
+    border-color: #bae6fd;
+    color: #bae6fd;
+  }
+  82%,
+  96% {
+    background: #0369a1;
+    border-color: #0369a1;
+    color: #fff;
+  }
+  100% {
+    background: #fff;
+    border-color: #bae6fd;
+    color: #bae6fd;
+  }
+}
+
+/* Tab panels */
+.lp-fadeUp {
+  animation: fadeUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lp-tabIndicator {
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -317,8 +758,43 @@
   .lp-tabBubble,
   .lp-route,
   .lp-ping,
-  .lp-pulseDot {
+  .lp-pulseDot,
+  .lp-marqueeTrack,
+  .lp-blob,
+  .lp-shimmer::before,
+  .lp-scan,
+  .lp-approve,
+  .lp-bubbleIn,
+  .lp-typing span,
+  .lp-otp,
+  .lp-knob,
+  .lp-travel,
+  .lp-stepGlow,
+  .lp-tlFill,
+  .lp-tlDot0,
+  .lp-tlDot1,
+  .lp-tlDot2,
+  .lp-tlDot3,
+  .lp-fadeUp {
     animation: none !important;
+  }
+  .lp-bubbleIn,
+  .lp-otp,
+  .lp-approve {
+    opacity: 1;
+    transform: none;
+  }
+  .lp-tlFill {
+    height: 100%;
+  }
+  .lp-scan,
+  .lp-travel {
+    display: none;
+  }
+  .lp-tile,
+  .lp-tile::after,
+  .lp-tabIndicator {
+    transition: none;
   }
   .lp-ecg {
     stroke-dashoffset: 0;

@@ -33,7 +33,13 @@ const NAV: NavGroup[] = [
       { href: "/admin/specializations", label: "Specializations" },
     ],
   },
-  { label: "Platform", items: [{ href: "/admin/settings", label: "Settings" }] },
+  {
+    label: "Platform",
+    items: [
+      { href: "/admin/messages", label: "Messages" },
+      { href: "/admin/settings", label: "Settings" },
+    ],
+  },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

@@ -2,11 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "@/components/landing/styles";
 import { Bubbles, Capsule, Tablet, Waves } from "@/components/landing/decor";
-import { Icon, type IconName } from "@/components/landing/icons";
+import { AudienceTabs } from "@/components/landing/audience-tabs";
+import { FaqSection } from "@/components/landing/faq-section";
+import { FeatureBento } from "@/components/landing/feature-bento";
+import { HowItWorks } from "@/components/landing/how-it-works";
+import { Icon } from "@/components/landing/icons";
+import { Marquee } from "@/components/landing/marquee";
 import { PhoneMockup } from "@/components/landing/phone-mockup";
 import { Reveal } from "@/components/landing/reveal";
+import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteNav } from "@/components/landing/site-nav";
-import { TrackingMap } from "@/components/landing/tracking-map";
+import { TrackingSection } from "@/components/landing/tracking-section";
 
 export const metadata: Metadata = {
   title: "MediGo · Medicines, doctors and delivery in one app",
@@ -16,126 +22,6 @@ export const metadata: Metadata = {
 
 // Marketing page: no request-time data, keep the whole route static.
 export const ensureStatic = "navigation";
-
-const FEATURES: { icon: IconName; title: string; text: string; tint: string }[] = [
-  {
-    icon: "pill",
-    title: "Order medicines",
-    text: "Search by name or brand, compare prices across pharmacies and check out from the one that suits you.",
-    tint: "from-sky-500 to-sky-700",
-  },
-  {
-    icon: "file",
-    title: "Upload a prescription",
-    text: "Snap your prescription and a pharmacist reviews it before prescription-only medicines are sent.",
-    tint: "from-cyan-500 to-sky-600",
-  },
-  {
-    icon: "video",
-    title: "Consult a doctor",
-    text: "Book an open slot with a verified doctor and talk by video, audio or chat, then get a digital prescription.",
-    tint: "from-blue-500 to-indigo-600",
-  },
-  {
-    icon: "mapPin",
-    title: "Live rider tracking",
-    text: "Watch your rider on the map from pickup to your door, and call them right from the tracking screen.",
-    tint: "from-teal-500 to-cyan-600",
-  },
-  {
-    icon: "key",
-    title: "Safe hand-over",
-    text: "Every order is closed with your own 4-digit code, so your medicines only reach you.",
-    tint: "from-sky-600 to-blue-800",
-  },
-  {
-    icon: "wallet",
-    title: "Pay your way",
-    text: "Cash on delivery or pay online. Prices, delivery fee and any discount are shown before you order.",
-    tint: "from-cyan-600 to-teal-700",
-  },
-];
-
-const STEPS: { icon: IconName; title: string; text: string }[] = [
-  { icon: "search", title: "Find", text: "Search medicines or pick a category, and see each pharmacy's price." },
-  { icon: "file", title: "Verify", text: "Add a prescription if a medicine needs one. A pharmacist checks it." },
-  { icon: "package", title: "Prepare", text: "The pharmacy confirms and packs your order, then a nearby rider accepts it." },
-  { icon: "bike", title: "Deliver", text: "Track the rider live and share your 4-digit code at the door." },
-];
-
-const AUDIENCES: { icon: IconName; who: string; lead: string; points: string[] }[] = [
-  {
-    icon: "user",
-    who: "Customers",
-    lead: "Everything for your health in one app.",
-    points: [
-      "Medicines from nearby pharmacies",
-      "Doctor consultations by video, audio or chat",
-      "Saved addresses with your exact map pin",
-      "Order history, re-order and cancel before pickup",
-    ],
-  },
-  {
-    icon: "store",
-    who: "Pharmacies",
-    lead: "A web dashboard to run online orders.",
-    points: [
-      "Manage stock and prices for every medicine",
-      "Review prescriptions before you confirm",
-      "Move orders from confirmed to ready for pickup",
-      "Nearby riders pick up orders when they are ready",
-    ],
-  },
-  {
-    icon: "stethoscope",
-    who: "Doctors",
-    lead: "See patients online on your schedule.",
-    points: [
-      "Set your weekly availability and slot length",
-      "Consult by video, audio or chat",
-      "Write digital prescriptions in the app",
-      "Track your earnings and payouts",
-    ],
-  },
-  {
-    icon: "bike",
-    who: "Riders",
-    lead: "Deliver when you want, earn per drop.",
-    points: [
-      "Go online and see orders waiting for pickup",
-      "One tap opens directions in your maps app",
-      "Earnings and delivery history in one place",
-      "Every partner is verified by our team",
-    ],
-  },
-];
-
-const FAQ = [
-  {
-    q: "Do I need a prescription to order?",
-    a: "Only for prescription-only medicines. Upload a photo or PDF of your prescription at checkout and a pharmacist reviews it before your order is confirmed. Everything else can be ordered straight away.",
-  },
-  {
-    q: "How do I know my medicines reach me safely?",
-    a: "You can follow your rider live on the map, and the delivery is only completed when you give the rider your own 4-digit code.",
-  },
-  {
-    q: "How does a doctor consultation work?",
-    a: "Pick a doctor, choose an open time slot and the type of consultation: video, audio or chat. At the time of your appointment you join from the app, and the doctor can send you a digital prescription.",
-  },
-  {
-    q: "How can I pay?",
-    a: "You can pay cash on delivery or choose to pay online. The total, including the delivery fee and any coupon discount, is shown before you place the order.",
-  },
-  {
-    q: "Can I cancel an order?",
-    a: "Yes, any time before the rider picks it up. Held stock goes straight back to the pharmacy.",
-  },
-  {
-    q: "How do pharmacies, doctors and riders join?",
-    a: "Sign up in the app (doctors and riders) or contact us (pharmacies). Every partner is reviewed and approved by our team before they can take orders or patients.",
-  },
-];
 
 export default function Home() {
   return (
@@ -215,187 +101,52 @@ export default function Home() {
           <Waves />
         </section>
 
+        <Marquee />
+
         {/* ---------------- Features ---------------- */}
-        <section id="features" className="scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28" aria-labelledby="features-title">
-          <div className="mx-auto max-w-6xl">
+        <section id="features" className="relative scroll-mt-20 overflow-hidden px-4 py-24 sm:px-6 sm:py-32" aria-labelledby="features-title">
+          <span className={`${styles.blob} -left-40 top-24 h-96 w-96 bg-sky-100`} aria-hidden="true" />
+          <span className={`${styles.blob} -right-32 bottom-10 h-80 w-80 bg-cyan-100`} aria-hidden="true" style={{ animationDelay: "-8s" }} />
+          <div className="relative mx-auto max-w-6xl">
             <Reveal className="mx-auto max-w-2xl text-center">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0ea5e9]">What you can do</p>
-              <h2 id="features-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-                One app for your pharmacy, your doctor and your delivery
+              <h2 id="features-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
+                Your pharmacy, your doctor and your delivery. <span className="text-[#0369a1]">One app.</span>
               </h2>
               <p className="mt-4 text-[#4a6275]">
                 No more calling around for stock or waiting in clinic queues. MediGo brings pharmacies, doctors and
                 riders together so you can get care from home.
               </p>
             </Reveal>
-
-            <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {FEATURES.map((f, i) => (
-                <Reveal as="li" key={f.title} delay={(i % 3) * 90}>
-                  <article className={`${styles.card} h-full rounded-3xl border border-sky-100 bg-white p-7`}>
-                    <span
-                      className={`${styles.iconChip} grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${f.tint} text-white shadow-lg shadow-sky-700/25`}
-                    >
-                      <Icon name={f.icon} size={22} />
-                    </span>
-                    <h3 className="mt-5 text-lg font-bold">{f.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-[#4a6275]">{f.text}</p>
-                  </article>
-                </Reveal>
-              ))}
-            </ul>
+            <FeatureBento />
           </div>
         </section>
 
-        {/* ---------------- How it works ---------------- */}
-        <section
-          id="how-it-works"
-          className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#e3f2fa] to-[#f5fbff] px-4 py-20 sm:px-6 sm:py-28"
-          aria-labelledby="how-title"
-        >
-          <div className="mx-auto max-w-6xl">
-            <Reveal className="mx-auto max-w-2xl text-center">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0ea5e9]">How it works</p>
-              <h2 id="how-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-                From search to your door in four steps
-              </h2>
-            </Reveal>
+        <HowItWorks />
 
-            <Reveal className="relative mt-16">
-              <div
-                className={`${styles.connector} absolute left-[12.5%] right-[12.5%] top-8 hidden h-1 rounded-full bg-gradient-to-r from-[#0369a1] via-[#0ea5e9] to-[#67e8f9] lg:block`}
-                aria-hidden="true"
-              />
-              <ol className="relative grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-                {STEPS.map((s, i) => (
-                  <li key={s.title} className="text-center">
-                    <span className="relative mx-auto grid h-16 w-16 place-items-center rounded-full bg-white text-[#0369a1] shadow-[0_12px_30px_-10px_rgba(3,105,161,0.5)] ring-4 ring-[#e3f2fa]">
-                      <Icon name={s.icon} size={26} />
-                      <span className="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full bg-gradient-to-br from-[#0ea5e9] to-[#0369a1] text-xs font-bold text-white">
-                        {i + 1}
-                      </span>
-                    </span>
-                    <h3 className="mt-5 text-lg font-bold">{s.title}</h3>
-                    <p className="mx-auto mt-2 max-w-[16rem] text-[15px] leading-relaxed text-[#4a6275]">{s.text}</p>
-                  </li>
-                ))}
-              </ol>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ---------------- Live tracking ---------------- */}
-        <section id="tracking" className="scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28" aria-labelledby="tracking-title">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-            <Reveal>
-              <TrackingMap />
-            </Reveal>
-            <Reveal delay={120}>
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0ea5e9]">Live tracking</p>
-              <h2 id="tracking-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Know exactly where your medicines are
-              </h2>
-              <p className="mt-4 text-[#4a6275]">
-                As soon as a rider accepts your order, you see them move on the map in real time, from the pharmacy
-                counter to your doorstep.
-              </p>
-              <ul className="mt-7 space-y-4">
-                {[
-                  { t: "Status at every step", d: "Confirmed, preparing, picked up, on the way: you get a notification each time." },
-                  { t: "Rider details up front", d: "Name, vehicle number and a one-tap call button." },
-                  { t: "Your location stays private", d: "Live location is shared only during an active delivery, and only with you." },
-                ].map((x) => (
-                  <li key={x.t} className="flex gap-3">
-                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-100 text-[#0369a1]">
-                      <Icon name="check" size={14} strokeWidth={3} />
-                    </span>
-                    <span>
-                      <span className="font-bold">{x.t}.</span>{" "}
-                      <span className="text-[#4a6275]">{x.d}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-        </section>
+        <TrackingSection />
 
         {/* ---------------- Partners ---------------- */}
         <section
           id="partners"
-          className="scroll-mt-20 bg-gradient-to-b from-[#f5fbff] to-[#e3f2fa] px-4 py-20 sm:px-6 sm:py-28"
+          className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#f5fbff] via-[#e8f5fc] to-[#f5fbff] px-4 py-24 sm:px-6 sm:py-32"
           aria-labelledby="partners-title"
         >
           <div className="mx-auto max-w-6xl">
             <Reveal className="mx-auto max-w-2xl text-center">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0ea5e9]">Built for everyone</p>
-              <h2 id="partners-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+              <h2 id="partners-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
                 One platform, four sides of care
               </h2>
+              <p className="mt-4 text-[#4a6275]">Pick who you are to see what MediGo does for you.</p>
             </Reveal>
-
-            <ul className="mt-14 grid gap-5 md:grid-cols-2">
-              {AUDIENCES.map((a, i) => (
-                <Reveal as="li" key={a.who} delay={(i % 2) * 100}>
-                  <article className={`${styles.card} h-full rounded-3xl border border-sky-100 bg-white p-7`}>
-                    <div className="flex items-center gap-4">
-                      <span className={`${styles.iconChip} grid h-12 w-12 place-items-center rounded-2xl bg-sky-50 text-[#0369a1] ring-1 ring-sky-100`}>
-                        <Icon name={a.icon} size={22} />
-                      </span>
-                      <div>
-                        <h3 className="text-lg font-bold">{a.who}</h3>
-                        <p className="text-sm text-[#4a6275]">{a.lead}</p>
-                      </div>
-                    </div>
-                    <ul className="mt-5 space-y-2.5">
-                      {a.points.map((p) => (
-                        <li key={p} className="flex gap-2.5 text-[15px]">
-                          <Icon name="check" size={18} strokeWidth={2.6} className="mt-0.5 shrink-0 text-[#0ea5e9]" />
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                </Reveal>
-              ))}
-            </ul>
-
-            <Reveal className="mt-10 text-center">
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 rounded-full bg-[#0b2135] px-6 py-3.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
-              >
-                Pharmacy or admin? Sign in to the portal
-                <Icon name="arrowRight" size={16} />
-              </Link>
+            <Reveal>
+              <AudienceTabs />
             </Reveal>
           </div>
         </section>
 
-        {/* ---------------- FAQ ---------------- */}
-        <section id="faq" className="scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28" aria-labelledby="faq-title">
-          <div className="mx-auto max-w-3xl">
-            <Reveal className="text-center">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0ea5e9]">FAQ</p>
-              <h2 id="faq-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Questions, answered
-              </h2>
-            </Reveal>
-            <div className="mt-12 space-y-3">
-              {FAQ.map((f, i) => (
-                <Reveal key={f.q} delay={i * 50}>
-                  <details className={`${styles.faq} group rounded-2xl border border-sky-100 bg-white px-6 open:shadow-[0_16px_40px_-24px_rgba(3,105,161,0.5)]`}>
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-bold">
-                      {f.q}
-                      <Icon name="chevronDown" size={20} className={`${styles.chevron} shrink-0 text-[#0369a1]`} />
-                    </summary>
-                    <p className="pb-5 leading-relaxed text-[#4a6275]">{f.a}</p>
-                  </details>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        <FaqSection />
 
         {/* ---------------- Get the app ---------------- */}
         <section id="get-app" className="scroll-mt-20 px-4 pb-24 sm:px-6" aria-labelledby="app-title">
@@ -431,17 +182,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-sky-100 bg-white px-4 py-10 sm:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-[#4a6275] sm:flex-row">
-          <p className="font-semibold text-[#0b2135]">MediGo</p>
-          <nav aria-label="Footer" className="flex gap-6">
-            <Link href="/about" className="hover:text-[#0369a1]">About</Link>
-            <Link href="/contact" className="hover:text-[#0369a1]">Contact</Link>
-            <Link href="/login" className="hover:text-[#0369a1]">Partner login</Link>
-          </nav>
-          <p>© MediGo. All rights reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

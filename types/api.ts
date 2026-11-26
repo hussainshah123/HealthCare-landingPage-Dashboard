@@ -310,3 +310,15 @@ export interface DeliveryJoinAck {
   ok: boolean;
   lastLocation?: { lat: number; lng: number; heading?: number | null; recordedAt?: string } | null;
 }
+
+/** A message sent from the website's contact form. */
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  topic: "CUSTOMER" | "PHARMACY" | "DOCTOR" | "RIDER" | "OTHER";
+  message: string;
+  handled: boolean;
+  createdAt: string;
+}

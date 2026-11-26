@@ -13,6 +13,7 @@ import type {
   PlatformSettings,
   Role,
 } from "@/types/api";
+import type { ContactMessage } from "@/types/api";
 import { request } from "./client";
 
 // GET /admin/stats
@@ -65,3 +66,9 @@ export const listPayments = (q: { page?: number }) =>
 export const getSettings = () => request<PlatformSettings>("/admin/settings");
 export const updateSettings = (body: PlatformSettings) =>
   request<PlatformSettings>("/admin/settings", { method: "PUT", body });
+
+// GET /contact?handled=&page= · PATCH /contact/:id { handled }  (website contact form messages)
+export const listContactMessages = (q: { handled?: boolean; page?: number }) =>
+  request<Paginated<ContactMessage>>("/contact", { query: q });
+export const setContactMessageHandled = (id: string, handled: boolean) =>
+  request<ContactMessage>(`/contact/${encodeURIComponent(id)}`, { method: "PATCH", body: { handled } });
