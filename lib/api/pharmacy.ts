@@ -1,4 +1,6 @@
 import type {
+  BulkInventoryResult,
+  BulkInventoryRow,
   InventoryCreateInput,
   InventoryItem,
   InventoryUpdateInput,
@@ -41,3 +43,10 @@ export const reviewPrescription = (id: string, approved: boolean, note?: string)
     method: "PATCH",
     body: note ? { approved, note } : { approved },
   });
+
+// POST /inventory/bulk { rows, dryRun } — CSV import (dryRun previews without saving)
+export const bulkImportInventory = (rows: BulkInventoryRow[], dryRun: boolean) =>
+  request<BulkInventoryResult>("/inventory/bulk", { method: "POST", body: { rows, dryRun } });
+
+/** GET /inventory/template.csv through the authenticated proxy. */
+export const INVENTORY_TEMPLATE_URL = "/api/backend/inventory/template.csv";

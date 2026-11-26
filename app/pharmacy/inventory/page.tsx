@@ -15,6 +15,7 @@ import { Field, Input } from "@/components/ui/form";
 import { Modal } from "@/components/ui/modal";
 import { Alert } from "@/components/ui/states";
 import { cx } from "@/components/ui/cx";
+import { CsvImportModal } from "@/components/pharmacy/csv-import-modal";
 
 const LIMIT = 20;
 const LOW_STOCK = 10;
@@ -38,6 +39,7 @@ export default function PharmacyInventoryPage() {
   const [page, setPage] = useState(1);
   const [editing, setEditing] = useState<Editing | null>(null);
   const [flash, setFlash] = useState<string | null>(null);
+  const [importing, setImporting] = useState(false);
   const { data, error, loading, reload } = useQuery(() => listInventory({ page, limit: LIMIT }), [page]);
 
   const columns: Column<InventoryItem>[] = [
@@ -83,7 +85,22 @@ export default function PharmacyInventoryPage() {
       <PageHeader
         title="Inventory"
         description="Stock levels, prices, batches and expiry dates."
-        actions={<Button onClick={() => setEditing({ mode: "create" })}>Add stock item</Button>}
+        actions={
+          <>
+            <Button variant="secondary" onClick={() => setImporting(true)}>
+              Import CSV
+            </Button>
+            <Button onClick={() => setEditing({ mode: "create" })}>Add stock item</Button>
+          </>
+        }
+      />
+      <CsvImportModal
+        open={importing}
+        onClose={() => setImporting(false)}
+        onImported={() => {
+          setPage(1);
+          reload();
+        }}
       />
       {flash && (
         <div className="mb-4">

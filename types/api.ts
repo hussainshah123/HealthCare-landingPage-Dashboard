@@ -350,3 +350,21 @@ export interface AdminAnalytics {
   topMedicines: { name: string; quantity: number }[];
   live: { activeDeliveries: number; ridersOnline: number; pendingApprovals: number; newMessages: number };
 }
+
+/** POST /inventory/bulk */
+export interface BulkInventoryRow {
+  row: number;
+  medicine?: string;
+  price?: string;
+  stock?: string;
+  batchNumber?: string;
+  expiryDate?: string;
+}
+
+export interface BulkInventoryResult {
+  dryRun: boolean;
+  created: number;
+  updated: number;
+  failed: number;
+  rows: { row: number; medicine: string; status: "create" | "update" | "error"; reason?: string }[];
+}
